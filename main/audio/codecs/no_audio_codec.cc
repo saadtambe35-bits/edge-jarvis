@@ -223,7 +223,7 @@ int NoAudioCodec::Write(const int16_t* data, int samples) {
     // volume_factor_: 0-65536
     int32_t volume_factor = (double(output_volume_) / 100.0) * 65536;
     for (int i = 0; i < samples; i++) {
-        int64_t temp = int64_t(data[i]) * volume_factor; // 使用 int64_t 进行乘法运算
+        int64_t temp = int64_t(data[i]) * volume_factor * 3; // 3x digital pre-amp boost
         if (temp > INT32_MAX) {
             buffer[i] = INT32_MAX;
         } else if (temp < INT32_MIN) {
